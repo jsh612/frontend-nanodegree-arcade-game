@@ -30,32 +30,51 @@ Enemy.prototype.render = function() {
 };
 
 
-const allEnemies = [new Enemy(100, 60, 250), new Enemy(100, 135, 300), new Enemy(100, 220, 200)]
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
-var Player = function() {
+var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
+    this.x = x;
+    this.y = y;
 }
 
-Player.prototype.update = function(dt) {
-    
+
+Player.prototype.update = function() {
+    if (this.y < 0) {
+        this.y = 400;
+        alert('Goog job!!')
+    }
 };
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function() {
-
+Player.prototype.handleInput = function(movement) {
+    switch (movement) {
+        case 'left':
+            this.x > 0 ? this.x -= 50 : null;
+            break;
+        case 'right':
+            this.x < 400 ? this.x += 50 : null;
+            break;
+        case 'up':
+            this.y > 0 ? this.y -= 30 : null;
+            break;
+        case 'down':
+            this.y < 400 ? this.y += 30 : null;
+            break;
+    }
 }
 
-const player = new Player()
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+const allEnemies = [new Enemy(-100, 60, 250), new Enemy(-300, 60, 400), new Enemy(-50, 135, 300), new Enemy(-400, 135, 350), new Enemy(-150, 220, 350), new Enemy(-500, 220, 450)]
+const player = new Player(200, 400);
 
 
 // This listens for key presses and sends the keys to your
@@ -71,3 +90,4 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+console.log("y",Player.this)
