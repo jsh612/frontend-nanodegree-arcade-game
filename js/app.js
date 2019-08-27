@@ -1,4 +1,9 @@
 // Enemies our player must avoid
+let enemiesX = [];
+let enemiesY = [];
+
+let numy = 0;
+
 var Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -10,6 +15,9 @@ var Enemy = function(x, y, v) {
     this.x = x;
     this.y = y;
     this.v = v;
+
+    enemiesX.push(this.x);
+    enemiesY.push(this.y);
 };
 
 // Update the enemy's position, required method for game
@@ -21,7 +29,12 @@ Enemy.prototype.update = function(dt) {
     this.x += this.v * dt;
     if (this.x > 500) {
         this.x = -100;
-    }
+    };
+
+    enemiesX.push(this.x);
+    enemiesX = enemiesX.slice(-6);
+    enemiesY.push(this.y);
+    enemiesY = enemiesY.slice(-6);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -33,6 +46,7 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+let playerPosition = [];
 
 var Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
@@ -43,9 +57,21 @@ var Player = function(x, y) {
 
 Player.prototype.update = function() {
     if (this.y < 0) {
-        this.y = 400;
+        this.y = 435;
         alert('Goog job!!')
-    }
+    };
+    
+    for (let i = 0; i < enemiesX.length; i++) {
+        if((Math.abs(enemiesX[i] - playerPosition[0]) < 5) && (enemiesY[i] === playerPosition[1])) {
+            this.y = 435;
+            alert('Failed')
+        };
+    };
+
+    playerPosition = [];
+    playerPosition = [this.x, this.y];
+
+    // console.log(this.y);
 };
 
 Player.prototype.render = function() {
@@ -55,16 +81,16 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function(movement) {
     switch (movement) {
         case 'left':
-            this.x > 0 ? this.x -= 50 : null;
+            this.x > 0 ? this.x -= 37.5 : null;
             break;
         case 'right':
-            this.x < 400 ? this.x += 50 : null;
+            this.x < 400 ? this.x += 37.5 : null;
             break;
         case 'up':
-            this.y > 0 ? this.y -= 30 : null;
+            this.y > 0 ? this.y -= 37.5: null;
             break;
         case 'down':
-            this.y < 400 ? this.y += 30 : null;
+            this.y < 400 ? this.y += 37.5 : null;
             break;
     }
 }
@@ -73,8 +99,8 @@ Player.prototype.handleInput = function(movement) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = [new Enemy(-100, 60, 250), new Enemy(-300, 60, 400), new Enemy(-50, 135, 300), new Enemy(-400, 135, 350), new Enemy(-150, 220, 350), new Enemy(-500, 220, 450)]
-const player = new Player(200, 400);
+const allEnemies = [new Enemy(-100, 60, 250), new Enemy(-300, 60, 400), new Enemy(-50, 135, 300), new Enemy(-400, 135, 350), new Enemy(-150, 210, 350), new Enemy(-500, 210, 450)]
+const player = new Player(200, 435);
 
 
 // This listens for key presses and sends the keys to your
@@ -90,4 +116,3 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-console.log("y",Player.this)
