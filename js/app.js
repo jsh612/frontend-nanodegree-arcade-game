@@ -2,16 +2,15 @@
 let enemiesX = [];
 let enemiesY = [];
 
-let numy = 0;
 
-var Enemy = function(x, y, v) {
+const Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     // this.sprite = 'images/enemy-bug.png';
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.v = v;
@@ -48,7 +47,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 let playerPosition = [];
 
-var Player = function(x, y) {
+const Player = function(x, y) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
@@ -70,8 +69,6 @@ Player.prototype.update = function() {
 
     playerPosition = [];
     playerPosition = [this.x, this.y];
-
-    // console.log(this.y);
 };
 
 Player.prototype.render = function() {
