@@ -84,10 +84,10 @@ Player.prototype.handleInput = function(movement) {
             this.x < 400 ? this.x += 37.5 : null;
             break;
         case 'up':
-            this.y > 0 ? this.y -= 37.5: null;
+            this.y > 0 ? this.y -= 75 : null;
             break;
         case 'down':
-            this.y < 400 ? this.y += 37.5 : null;
+            this.y < 400 ? this.y += 75 : null;
             break;
     }
 }
