@@ -61,7 +61,7 @@ Player.prototype.update = function() {
     };
     
     for (let i = 0; i < enemiesX.length; i++) {
-        if((Math.abs(enemiesX[i] - playerPosition[0]) < 65) && (Math.abs(enemiesY[i] - playerPosition[1])<10)) {
+        if((Math.abs(enemiesX[i] - playerPosition[0]) < 70) && (enemiesY[i] === playerPosition[1])) {
             this.y = 435;
             alert('Failed')
         };
