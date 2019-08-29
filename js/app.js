@@ -55,8 +55,8 @@ const Player = function(x, y) {
 
 
 Player.prototype.update = function() {
-    if (this.y ===0 ) {
-        alert('Goog job!!');
+    if (this.y === 0 ) {
+        alert('You win!!');
         this.y = 435;
     };
     
