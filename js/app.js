@@ -55,9 +55,9 @@ const Player = function(x, y) {
 
 
 Player.prototype.update = function() {
-    if (this.y < 0) {
+    if (this.y ===0 ) {
+        alert('Goog job!!');
         this.y = 435;
-        alert('Goog job!!')
     };
     
     for (let i = 0; i < enemiesX.length; i++) {
@@ -84,7 +84,7 @@ Player.prototype.handleInput = function(movement) {
             this.x < 400 ? this.x += 37.5 : null;
             break;
         case 'up':
-            this.y > 0 ? this.y -= 75 : null;
+            this.y > 0 ? this.y -= 75 : this.y = 0;
             break;
         case 'down':
             this.y < 400 ? this.y += 75 : null;
